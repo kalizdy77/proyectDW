@@ -56,6 +56,7 @@ async def obtener_cliente(id_cliente: int, conn = Depends(get_conexion)):
 
 @router.post("/")
 async def crear_cliente(cliente: Cliente, conn = Depends(get_conexion)):
+    print(f"Ingresando al cliente")
     consulta = "INSERT INTO cliente(ci, nombre, paterno, materno, telefono, email, direccion, activo) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
     parametros = (cliente.ci, cliente.nombre, cliente.paterno, cliente.materno, cliente.telefono, cliente.email, cliente.direccion, cliente.activo)
     try:

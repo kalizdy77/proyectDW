@@ -1,27 +1,10 @@
--- ============================================================
--- SCRIPT SQL - Sistema de Inventario y Ventas
--- Base de datos: bd_inventario
--- ============================================================
-
--- Crear la base de datos (ejecutar como superusuario si no existe)
--- CREATE DATABASE bd_inventario;
-
--- Conectarse a la base de datos: \c bd_inventario
-
--- ============================================================
--- 1. TABLA: categoria
---    Categorías de los productos (ej: Electrónica, Ropa, etc.)
--- ============================================================
 CREATE TABLE IF NOT EXISTS categoria (
     id_categoria SERIAL PRIMARY KEY,
     descripcion  VARCHAR(100) NOT NULL,
     activo       BOOLEAN      NOT NULL DEFAULT TRUE
 );
 
--- ============================================================
--- 2. TABLA: proveedor
---    Proveedores que suministran los productos
--- ============================================================
+
 CREATE TABLE IF NOT EXISTS proveedor (
     id_proveedor SERIAL PRIMARY KEY,
     nombre       VARCHAR(150) NOT NULL,
@@ -32,10 +15,7 @@ CREATE TABLE IF NOT EXISTS proveedor (
     activo       BOOLEAN      NOT NULL DEFAULT TRUE
 );
 
--- ============================================================
--- 3. TABLA: producto
---    Catálogo de productos con precios de compra/venta y stock
--- ============================================================
+
 CREATE TABLE IF NOT EXISTS producto (
     id_producto   SERIAL PRIMARY KEY,
     id_categoria  INT           NOT NULL REFERENCES categoria(id_categoria),
@@ -50,10 +30,7 @@ CREATE TABLE IF NOT EXISTS producto (
     activo        BOOLEAN       NOT NULL DEFAULT TRUE
 );
 
--- ============================================================
--- 4. TABLA: cliente
---    Clientes que realizan compras / ventas
--- ============================================================
+
 CREATE TABLE IF NOT EXISTS cliente (
     id_cliente SERIAL PRIMARY KEY,
     ci         VARCHAR(20)  UNIQUE NOT NULL,
@@ -66,10 +43,7 @@ CREATE TABLE IF NOT EXISTS cliente (
     activo     BOOLEAN      NOT NULL DEFAULT TRUE
 );
 
--- ============================================================
--- 5. TABLA: venta
---    Cabecera de cada venta realizada
--- ============================================================
+
 CREATE TABLE IF NOT EXISTS venta (
     id_venta    SERIAL PRIMARY KEY,
     id_cliente  INT           NOT NULL REFERENCES cliente(id_cliente),
@@ -81,10 +55,7 @@ CREATE TABLE IF NOT EXISTS venta (
     observacion TEXT
 );
 
--- ============================================================
--- 6. TABLA: detalle_venta
---    Detalle de los productos incluidos en cada venta
--- ============================================================
+
 CREATE TABLE IF NOT EXISTS detalle_venta (
     id_detalle      SERIAL PRIMARY KEY,
     id_venta        INT           NOT NULL REFERENCES venta(id_venta) ON DELETE CASCADE,
@@ -95,9 +66,7 @@ CREATE TABLE IF NOT EXISTS detalle_venta (
     subtotal        NUMERIC(10,2) NOT NULL
 );
 
--- ============================================================
--- DATOS DE EJEMPLO (opcional - borrar si no se necesita)
--- ============================================================
+
 
 INSERT INTO categoria (descripcion, activo) VALUES
     ('Electrónica', true),
