@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Inventario y Ventas</title>
+</head>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1>Sistema de Inventario y Ventas</h1>
+        </div>
+        <div class="nav-item active" onclick="switchTab('categoria')" id="nav-categoria">📦 Categorías</div>
+        <div class="nav-item" onclick="switchTab('producto')" id="nav-producto">🛒 Productos</div>
+        <div class="nav-item" onclick="switchTab('cliente')" id="nav-cliente">👥 Clientes</div>
+        <div class="nav-item" onclick="switchTab('proveedor')" id="nav-proveedor">🚚 Proveedores</div>
+        <div class="nav-item" onclick="switchTab('venta')" id="nav-venta">💰 Ventas</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h2 id="current-title">Categorías</h2>
+            <button class="btn btn-primary" onclick="openModal()">
+                <span>+</span> Nuevo Registro
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="table-container">
+                <table id="data-table">
+                    <thead id="table-head">
+                        <!-- Headers will be injected here -->
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Data will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Nuevo Registro</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="main-form">
+                <div id="form-fields">
+                    <!-- Form fields will be injected here -->
+                </div>
+
+                <div id="venta-items-container"
+                    style="display: none; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
+                    <h4 style="margin-bottom: 10px;">Productos</h4>
+                    <div id="items-list"></div>
+                    <button type="button" class="btn" style="margin-top: 10px; font-size: 0.75rem;"
+                        onclick="addProductLine()">+ Agregar Producto</button>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e2e8f0;"
+                        onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Para Detalles de Venta -->
+    <div id="modal-detalle" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3>Detalles de la Venta #<span id="det-nro-venta"></span></h3>
+                <button class="close-btn" onclick="closeDetalleModal()">&times;</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unit.</th>
+                            <th>Descuento</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="det-table-body">
+                        <!-- Items will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-primary" onclick="closeDetalleModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Mensaje aquí</div>
+
+    <script src="sistema_get.js"></script>
+</body>
+
+</html>

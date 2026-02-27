@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sistema-inventario-ventas"
+version = "1.0.0"
+description = "API REST - Sistema de Inventario y Ventas"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.129.0",
+    "psycopg[binary,pool]>=3.3.3",
+    "uvicorn[standard]>=0.41.0",
+    "pydantic>=2.0.0",
+]
+
+[tool.setuptools]
+packages = ["config", "routes"]
