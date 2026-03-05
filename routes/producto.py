@@ -93,6 +93,7 @@ async def crear_producto(producto: Producto, conn = Depends(get_conexion)):
 
 @router.put("/{id_producto}")
 async def actualizar_producto(id_producto: int, producto: Producto, conn = Depends(get_conexion)):
+    print(f"Actualizacion de update")
     consulta = """
         UPDATE producto
         SET id_categoria=%s, id_proveedor=%s, codigo=%s, descripcion=%s, precio_compra=%s,
